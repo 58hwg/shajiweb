@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>山西沙棘 - 金色果实的文化传承</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Font Awesome 图标库 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<!-- AOS 滚动动画库 -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"/>
+<!-- Swiper 轮播库 -->
+<link href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" rel="stylesheet">
+<!-- 自定义字体 -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&amp;family=ZCOOL+XiaoWei&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<style>
+        /* 自定义样式 */
+        :root {
+            --primary-color: #e6a23c; /* 沙棘橙黄色 */
+            --secondary-color: #8b5a2b; /* 大地棕色 */
+            --accent-color: #f56c6c; /* 点缀红色 */
+            --text-color: #333;
+            --light-bg: #f8f4e9;
+        }
+        
+        body {
+            font-family: 'Noto Serif SC', serif;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            overflow-x: hidden;
+        }
+        
+        .sidebar {
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        
+        .sidebar.collapsed {
+            width: 80px;
+        }
+        
+        .sidebar.collapsed .nav-text {
+            display: none;
+        }
+        
+        .nav-item {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item:hover {
+            background-color: rgba(230, 162, 60, 0.1);
+        }
+        
+        .nav-item.active {
+            background-color: rgba(230, 162, 60, 0.2);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .section-title {
+        font-family: 'Ma Shan Zheng', cursive; /* 使用马善政手写体 */
+        position: relative;
+        display: inline-block;
+    }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), transparent);
+        }
+        
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonial-card {
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+        }
+        
+        .cultural-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%);
+            backdrop-filter: blur(5px);
+        }
+        
+         .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), 
+                        url('images/包装插图.png'); /* 修改的部分，使用相对路径指向本地图片 */
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .ip-character {
+            background: url('https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</link></head>
+<body class="min-h-screen flex">
+<!-- 侧边导航栏 -->
+<div class="sidebar h-screen fixed left-0 top-0 z-50 w-64 shadow-lg flex flex-col">
+<!-- 品牌标志 -->
+<div class="p-4 flex items-center justify-between border-b">
+<div class="flex items-center">
+<img alt="沙棘标志" class="w-10 h-10" src="images/logo.png"/>
+<span class="text-xl font-bold ml-2 text-orange-600">山西沙棘</span>
+</div>
+<button class="text-gray-600 hover:text-orange-600" id="toggleSidebar">
+<i class="fas fa-bars"></i>
+</button>
+</div>
+<!-- 导航菜单 -->
+<nav class="flex-1 overflow-y-auto py-4">
+<ul>
+<li class="nav-item active" data-target="home">
+<a class="flex items-center p-4 text-gray-700 hover:text-orange-600" href="#">
+<i class="fas fa-home text-lg w-6 text-center"></i>
+<span class="nav-text ml-3">主页面</span>
+</a>
+</li>
+<li class="nav-item" data-target="products">
+<a class="flex items-center p-4 text-gray-700 hover:text-orange-600" href="#">
+<i class="fas fa-box-open text-lg w-6 text-center"></i>
+<span class="nav-text ml-3">产品展示</span>
+</a>
+</li>
+<li class="nav-item" data-target="ip">
+<a class="flex items-center p-4 text-gray-700 hover:text-orange-600" href="#">
+<i class="fas fa-robot text-lg w-6 text-center"></i>
+<span class="nav-text ml-3">IP形象</span>
+</a>
+</li>
+<li class="nav-item" data-target="culture">
+<a class="flex items-center p-4 text-gray-700 hover:text-orange-600" href="#">
+<i class="fas fa-landmark text-lg w-6 text-center"></i>
+<span class="nav-text ml-3">文化介绍</span>
+</a>
+</li>
+<li class="nav-item" data-target="testimonials">
+<a class="flex items-center p-4 text-gray-700 hover:text-orange-600" href="#">
+<i class="fas fa-comment-dots text-lg w-6 text-center"></i>
+<span class="nav-text ml-3">用户评价</span>
+</a>
+</li>
+<li class="nav-item" data-target="contact">
+<a class="flex items-center p-4 text-gray-700 hover:text-orange-600" href="#">
+<i class="fas fa-envelope text-lg w-6 text-center"></i>
+<span class="nav-text ml-3">联系我们</span>
+</a>
+</li>
+</ul>
+</nav>
+<!-- 底部社交链接 -->
+<div class="p-4 border-t">
+<div class="flex justify-center space-x-4">
+<a class="text-gray-600 hover:text-orange-600" href="#"><i class="fab fa-weixin"></i></a>
+<a class="text-gray-600 hover:text-orange-600" href="#"><i class="fab fa-weibo"></i></a>
+<a class="text-gray-600 hover:text-orange-600" href="#"><i class="fab fa-douyin"></i></a>
+<a class="text-gray-600 hover:text-orange-600" href="#"><i class="fab fa-instagram"></i></a>
+</div>
+</div>
+</div>
+<!-- 主内容区域 -->
+<div class="main-content flex-1 ml-64 transition-all duration-300">
+<!-- 首页 -->
+<section class="content-section active" id="home">
+<!-- 英雄区域 -->
+<div class="hero-section min-h-screen flex items-center justify-center text-white relative">
+<div class="absolute inset-0 bg-black opacity-40"></div>
+<div class="container mx-auto px-6 z-10 text-center" data-aos="fade-up">
+<h1 class="text-5xl md:text-6xl font-bold mb-6">山西沙棘</h1>
+<p class="text-xl md:text-2xl mb-8">金色果实的文化传承 · 千年古城的自然馈赠</p>
+<button class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
+                        探索更多
+                    </button>
+</div>
+<div class="absolute bottom-10 left-0 right-0 text-center">
+<a class="text-white animate-bounce inline-block" href="#intro">
+<i class="fas fa-chevron-down text-2xl"></i>
+</a>
+</div>
+</div>
+<!-- 介绍部分 -->
+<div class="py-20 bg-white" id="intro">
+<div class="container mx-auto px-6">
+<div class="text-center mb-16">
+<h2 class="section-title text-3xl md:text-4xl font-bold text-gray-800">沙棘 · 自然之宝</h2>
+<p class="mt-4 text-gray-600 max-w-3xl mx-auto">生长于黄土高原的珍贵果实，蕴含着山西大地的精华与能量</p>
+</div>
+<div class="grid md:grid-cols-3 gap-10">
+<div class="text-center" data-aos="fade-up" data-aos-delay="100">
+<div class="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
+<i class="fas fa-leaf text-3xl text-orange-600"></i>
+</div>
+<h3 class="text-xl font-bold mb-3">天然营养</h3>
+<p class="text-gray-600">沙棘富含维生素C、E及多种微量元素，是自然界中的营养宝库，被誉为"维生素之王"。</p>
+</div>
+<div class="text-center" data-aos="fade-up" data-aos-delay="200">
+<div class="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
+<i class="fas fa-history text-3xl text-orange-600"></i>
+</div>
+<h3 class="text-xl font-bold mb-3">千年传承</h3>
+<p class="text-gray-600">早在唐代，沙棘就被记载于《本草拾遗》中，山西人民世代相传的沙棘采集与加工技艺。</p>
+</div>
+<div class="text-center" data-aos="fade-up" data-aos-delay="300">
+<div class="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
+<i class="fas fa-mountain text-3xl text-orange-600"></i>
+</div>
+<h3 class="text-xl font-bold mb-3">生态保护</h3>
+<p class="text-gray-600">沙棘根系发达，能有效防止水土流失，是黄土高原生态修复的重要植物。</p>
+</div>
+</div>
+</div>
+</div>
+<!-- 特色展示 -->
+<div class="py-20 bg-orange-50">
+<div class="container mx-auto px-6">
+<div class="flex flex-col md:flex-row items-center">
+<div class="md:w-1/2 mb-10 md:mb-0 md:pr-10" data-aos="fade-right">
+<img alt="沙棘果实" class="rounded-lg shadow-xl w-full h-auto object-cover" src="images/摄影图.png"/>
+</div>
+<div class="md:w-1/2" data-aos="fade-left">
+<h2 class="section-title text-3xl md:text-4xl font-bold text-gray-800 mb-6">山西沙棘的特色</h2>
+<p class="text-gray-700 mb-6">山西地处黄土高原，独特的气候和土壤条件孕育出品质卓越的沙棘果实。我们的沙棘饮料采用传统工艺与现代技术相结合，保留了沙棘的全部营养和天然风味。</p>
+<ul class="space-y-3">
+<li class="flex items-start">
+<i class="fas fa-check-circle text-orange-600 mt-1 mr-2"></i>
+<span class="text-gray-700">100%纯天然，无添加防腐剂</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-check-circle text-orange-600 mt-1 mr-2"></i>
+<span class="text-gray-700">富含维生素C，是橙子的6倍</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-check-circle text-orange-600 mt-1 mr-2"></i>
+<span class="text-gray-700">独特的酸甜口感，回味悠长</span>
+</li>
+<li class="flex items-start">
+<i class="fas fa-check-circle text-orange-600 mt-1 mr-2"></i>
+<span class="text-gray-700">采用山西本地优质沙棘果实</span>
+</li>
+</ul>
+<button class="mt-8 bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-6 rounded-full transition duration-300">
+                                了解产品详情
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 产品展示 -->
+<section class="content-section hidden py-20 bg-white" id="products">
+<div class="container mx-auto px-6">
+<div class="text-center mb-16">
+<h2 class="section-title text-3xl md:text-4xl font-bold text-gray-800">产品展示</h2>
+<p class="mt-4 text-gray-600 max-w-3xl mx-auto">精选山西优质沙棘，匠心打造的系列产品</p>
+</div>
+<!-- 瓶身包装展示 -->
+<div class="mb-20">
+<h3 class="text-2xl font-bold mb-8 text-center text-orange-600">瓶身包装设计</h3>
+<div class="grid md:grid-cols-3 gap-8">
+<!-- 产品1 -->
+<div class="product-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up">
+<div class="h-64 bg-orange-50 flex items-center justify-center p-6">
+<img alt="应县木塔" class="h-full w-auto object-contain" src="images/应县木塔瓶身.png"/>
+</div>
+<div class="p-6">
+<h4 class="font-bold text-xl mb-2">应县木塔款</h4>
+<p class="text-gray-600 mb-4">应县木塔文创包装</p>
+<div class="flex justify-between items-center">
+<span class="font-bold text-orange-600">¥5</span>
+<button class="text-orange-600 hover:text-orange-700">
+<i class="fas fa-shopping-cart"></i> 加入购物车
+                                    </button>
+</div>
+</div>
+</div>
+<!-- 产品2 -->
+<div class="product-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="100">
+<div class="h-64 bg-orange-50 flex items-center justify-center p-6">
+<img alt="平遥古城包装" class="h-full w-auto object-contain" src="images/平遥古城瓶身.png"/>
+</div>
+<div class="p-6">
+<h4 class="font-bold text-xl mb-2">平遥古城款</h4>
+<p class="text-gray-600 mb-4">平遥古城文创包装</p>
+<div class="flex justify-between items-center">
+<span class="font-bold text-orange-600">¥5</span>
+<button class="text-orange-600 hover:text-orange-700">
+<i class="fas fa-shopping-cart"></i> 加入购物车
+                                    </button>
+</div>
+</div>
+</div>
+<!-- 产品3 -->
+<div class="product-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="200">
+<div class="h-64 bg-orange-50 flex items-center justify-center p-6">
+<img alt="云冈石窟款" class="h-full w-auto object-contain" src="images/云冈石窟瓶身.png"/>
+</div>
+<div class="p-6">
+<h4 class="font-bold text-xl mb-2">云冈石窟款</h4>
+<p class="text-gray-600 mb-4">云冈石窟文创包装</p>
+<div class="flex justify-between items-center">
+<span class="font-bold text-orange-600">¥5</span>
+<button class="text-orange-600 hover:text-orange-700">
+<i class="fas fa-shopping-cart"></i> 加入购物车
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 套装展示 -->
+<div>
+<h3 class="text-2xl font-bold mb-8 text-center text-orange-600">礼盒包装设计</h3>
+<div class="grid md:grid-cols-2 gap-8">
+<!-- 晋韵礼盒 -->
+<div class="product-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up">
+<div class="h-80 bg-orange-50 flex items-center justify-center p-6">
+<img alt="传统礼盒" class="h-full w-auto object-contain" src="images/礼盒1.png"/>
+</div>
+<div class="p-6">
+<h4 class="font-bold text-xl mb-2">晋韵礼盒</h4>
+<p class="text-gray-600 mb-4">内含8瓶三晋大地文创沙棘饮料，是赠送亲友的佳品</p>
+<div class="flex justify-between items-center">
+<span class="font-bold text-orange-600">¥50</span>
+<button class="text-orange-600 hover:text-orange-700">
+<i class="fas fa-shopping-cart"></i> 加入购物车
+                                    </button>
+</div>
+</div>
+</div>
+<!-- 礼盒2 -->
+<div class="product-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="100">
+<div class="h-80 bg-orange-50 flex items-center justify-center p-6">
+<img alt="2礼盒" class="h-full w-auto object-contain" src="images/礼盒2.png"/>
+</div>
+<div class="p-6">
+<h4 class="font-bold text-xl mb-2">文创套装</h4>
+<p class="text-gray-600 mb-4">除沙棘饮料外另外包含一套文创明信片和沙棘宣传大使——果果的IP衍生品</p>
+<div class="flex justify-between items-center">
+<span class="font-bold text-orange-600">¥60</span>
+<button class="text-orange-600 hover:text-orange-700">
+<i class="fas fa-shopping-cart"></i> 加入购物车
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- IP形象 -->
+<section class="content-section hidden py-20 ip-character bg-fixed bg-cover" id="ip">
+<div class="bg-black bg-opacity-50 py-20">
+<div class="container mx-auto px-6">
+<div class="text-center mb-16 text-white">
+<h2 class="section-title text-3xl md:text-4xl font-bold">IP形象展示</h2>
+<p class="mt-4 max-w-3xl mx-auto">我们的品牌IP形象，传递健康与快乐</p>
+</div>
+<!-- IP形象介绍 -->
+<div class="bg-white bg-opacity-90 rounded-xl p-8 max-w-4xl mx-auto mb-16" data-aos="fade-up">
+<div class="flex flex-col md:flex-row items-center">
+<div class="md:w-1/3 mb-6 md:mb-0 flex justify-center">
+<img alt="沙棘小精灵" class="w-48 h-48 object-contain" src="images/晋商.png"/>
+</div>
+<div class="md:w-2/3 md:pl-8">
+<h3 class="text-2xl font-bold mb-4 text-orange-600">沙棘小精灵 - 果果</h3>
+<p class="text-gray-700 mb-4">角色原型：拟人化猴子，参考中国猕猴的形象，象征机灵、敏捷、亲和力强。
+文化背景：融合山西传统服饰文化与沙棘生态象征，构建地域文化与自然生态的和谐交汇点。
+</p>
+<p class="text-gray-700">
+服饰：长衫马褂式样，符合晋商、晋地传统男性服装结构，简洁大气、注重礼仪感。
+配色采用黄土高原风格色调：以土黄、棕褐为主调，温暖厚重，贴近黄土高原的文明特色和沙棘的主题元素。
+细节装饰：衣摆、头饰等多处点缀沙棘果实图案，提升整体活力与文化辨识度。
+</p>
+</div>
+</div>
+</div>
+<!-- 三视图展示 -->
+<div class="bg-white bg-opacity-90 rounded-xl p-8 max-w-4xl mx-auto mb-16" data-aos="fade-up">
+<h3 class="text-2xl font-bold mb-6 text-center text-orange-600">三视图展示</h3>
+<div class="grid md:grid-cols-3 gap-6">
+<div class="text-center">
+<div class="h-48 bg-orange-50 rounded-lg flex items-center justify-center mb-4">
+<img alt="正面视图" class="h-40 w-auto object-contain" src="images/正视图.png"/>
+</div>
+<h4 class="font-bold mb-2">正面视图</h4>
+<p class="text-gray-600 text-sm"></p>
+</div>
+<div class="text-center">
+<div class="h-48 bg-orange-50 rounded-lg flex items-center justify-center mb-4">
+<img alt="侧面视图" class="h-40 w-auto object-contain" src="images/侧视图.png"/>
+</div>
+<h4 class="font-bold mb-2">侧面视图</h4>
+<p class="text-gray-600 text-sm"></p>
+</div>
+<div class="text-center">
+<div class="h-48 bg-orange-50 rounded-lg flex items-center justify-center mb-4">
+<img alt="背面视图" class="h-40 w-auto object-contain" src="images/后视图.png"/>
+</div>
+<h4 class="font-bold mb-2">背面视图</h4>
+<p class="text-gray-600 text-sm"></p>
+</div>
+</div>
+</div>
+<!-- 动作展示 -->
+<div class="bg-white bg-opacity-90 rounded-xl p-8 max-w-4xl mx-auto" data-aos="fade-up">
+<h3 class="text-2xl font-bold mb-6 text-center text-orange-600">衍生展示</h3>
+<div class="grid md:grid-cols-2 gap-6">
+<div class="text-center">
+<div class="h-48 bg-orange-50 rounded-lg flex items-center justify-center mb-4">
+<img alt="表情包" class="h-40 w-auto object-contain" src="images/表情包.png"/>
+</div>
+<h4 class="font-bold mb-2">表情包</h4>
+<p class="text-gray-600 text-sm">表情包衍生</p>
+</div>
+<div class="text-center">
+<div class="h-48 bg-orange-50 rounded-lg flex items-center justify-center mb-4">
+<img alt="服饰设计—晋剧戏服" class="h-40 w-auto object-contain" src="images/晋剧.png"/>
+</div>
+<h4 class="font-bold mb-2">服饰设计—晋剧戏服</h4>
+<p class="text-gray-600 text-sm">晋剧，山西四大剧种之一，又名山西梆子。</p>
+</div>
+<div class="text-center">
+<div class="h-48 bg-orange-50 rounded-lg flex items-center justify-center mb-4">
+<img alt="服饰设计—晋商马褂" class="h-40 w-auto object-contain" src="images/正视图.png"/>
+</div>
+<h4 class="font-bold mb-2">服饰设计—晋商马褂</h4>
+<p class="text-gray-600 text-sm">展现山西古人的精明能干</p>
+</div>
+<div class="text-center">
+<div class="h-48 bg-orange-50 rounded-lg flex items-center justify-center mb-4">
+<img alt="服饰设计—农民短衫" class="h-40 w-auto object-contain" src="images/农民.png"/>
+</div>
+<h4 class="font-bold mb-2">服饰设计—农民短衫</h4>
+<p class="text-gray-600 text-sm">展现山西古人的勤劳质朴</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 文化介绍 -->
+<section class="content-section hidden py-20 bg-white" id="culture">
+<div class="container mx-auto px-6">
+<div class="text-center mb-16">
+<h2 class="section-title text-3xl md:text-4xl font-bold text-gray-800">山西文化瑰宝</h2>
+<p class="mt-4 text-gray-600 max-w-3xl mx-auto">沙棘与山西千年文化的完美融合</p>
+</div>
+<!-- 平遥古城 -->
+<div class="cultural-card rounded-xl overflow-hidden shadow-lg mb-16" data-aos="fade-up">
+<div class="flex flex-col md:flex-row">
+<div class="md:w-1/2">
+<img alt="平遥古城" class="w-full h-full object-cover" src="images/平遥古城.png"/>
+</div>
+<div class="md:w-1/2 p-8">
+<h3 class="text-2xl font-bold mb-4 text-orange-600">平遥古城</h3>
+<p class="text-gray-700 mb-4">平遥古城位于山西省中部，始建于西周宣王时期，是中国汉民族城市在明清时期的杰出范例，保存了其所有特征。平遥古城是中国汉民族城市在明清时期的杰出范例，它保存了其所有特征，而且在中国历史的发展中为人们展示了一幅非同寻常的文化、经济、社会及宗教发展的完整画卷。</p>
+<p class="text-gray-700 mb-6">平遥古城内的街道商铺都体现历史原貌，设计布局体现了明清时期城市规划理念和形制分布，展示了五个世纪以来中国建筑风格和城市规划的演变，被称为研究中国古代城市的活样本，在建筑、宗教、商业、民俗、民间艺术上具有丰富且独特的价值。</p>
+<div class="flex items-center">
+<i class="fas fa-map-marker-alt text-orange-600 mr-2"></i>
+<span class="text-gray-600">山西省晋中市平遥县</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 应县木塔 -->
+<div class="cultural-card rounded-xl overflow-hidden shadow-lg mb-16" data-aos="fade-up">
+<div class="flex flex-col md:flex-row-reverse">
+<div class="md:w-1/2">
+<img alt="应县木塔" class="w-full h-full object-cover" src="images/应县木塔.png"/>
+</div>
+<div class="md:w-1/2 p-8">
+<h3 class="text-2xl font-bold mb-4 text-orange-600">应县木塔</h3>
+<p class="text-gray-700 mb-4">应县木塔，全称佛宫寺释迦塔，位于山西省朔州市应县，建于辽清宁二年（1056年），是世界上现存最古老最高大的木塔，与意大利比萨斜塔、巴黎埃菲尔铁塔并称"世界三大奇塔"。</p>
+<p class="text-gray-700 mb-6">应县木塔是现存世界木结构建设史上较典型的实例，中国建筑发展上较有价值的坐标，抗震避雷等科学领域研究的知识宝库，考证一个时代经济文化发展的一部“史典”。</p>
+<div class="flex items-center">
+<i class="fas fa-map-marker-alt text-orange-600 mr-2"></i>
+<span class="text-gray-600">山西省朔州市应县</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 云冈石窟 -->
+<div class="cultural-card rounded-xl overflow-hidden shadow-lg" data-aos="fade-up">
+<div class="flex flex-col md:flex-row">
+<div class="md:w-1/2">
+<img alt="云冈石窟" class="w-full h-full object-cover" src="images/云冈石窟.png"/>
+</div>
+<div class="md:w-1/2 p-8">
+<h3 class="text-2xl font-bold mb-4 text-orange-600">云冈石窟</h3>
+<p class="text-gray-700 mb-4">云冈石窟位于山西省大同市，始建于北魏时期，距今已有1500多年历史，是中国规模最大的古代石窟群之一，与敦煌莫高窟、洛阳龙门石窟并称为中国三大石窟。</p>
+<p class="text-gray-700 mb-6">云冈石窟作为中国第一个皇家授权开凿的石窟，反映了北魏王朝的政治雄心。与我国诸多石窟寺比较，云冈石窟最具西来样式，即胡风胡韵最为浓郁。其中既有印度、中西亚艺术元素，也有希腊、罗马建筑造型、装饰纹样、像貌特征等等，反映出与世界各大文明之间的渊源关系，这在中华艺术宝库中是独一无二的，对后世中国文化艺术的发展具有重要意义。</p>
+<div class="flex items-center">
+<i class="fas fa-map-marker-alt text-orange-600 mr-2"></i>
+<span class="text-gray-600">山西省大同市</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 用户评价 -->
+<section class="content-section hidden py-20 bg-orange-50" id="testimonials">
+<div class="container mx-auto px-6">
+<div class="text-center mb-16">
+<h2 class="section-title text-3xl md:text-4xl font-bold text-gray-800">用户评价</h2>
+<p class="mt-4 text-gray-600 max-w-3xl mx-auto">听听他们怎么说</p>
+</div>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- 评价1 -->
+<div class="testimonial-card rounded-xl p-6 shadow-md" data-aos="fade-up">
+<div class="flex items-center mb-4">
+<img alt="用户头像" class="w-12 h-12 rounded-full mr-4" src="https://randomuser.me/api/portraits/women/43.jpg"/>
+<div>
+<h4 class="font-bold">李女士</h4>
+<div class="flex text-orange-400">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+</div>
+</div>
+</div>
+<p class="text-gray-700 mb-4">"沙棘饮料口感酸甜适中，每天早上喝一瓶感觉整个人都精神了。包装设计很有山西特色，送礼也很体面。"</p>
+<div class="text-sm text-gray-500">2023年5月15日</div>
+</div>
+<!-- 评价2 -->
+<div class="testimonial-card rounded-xl p-6 shadow-md" data-aos="fade-up" data-aos-delay="100">
+<div class="flex items-center mb-4">
+<img alt="用户头像" class="w-12 h-12 rounded-full mr-4" src="https://randomuser.me/api/portraits/men/32.jpg"/>
+<div>
+<h4 class="font-bold">王先生</h4>
+<div class="flex text-orange-400">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star-half-alt"></i>
+</div>
+</div>
+</div>
+<p class="text-gray-700 mb-4">"作为一个山西人，很高兴看到家乡的特产能有这么精美的包装和现代化的产品。味道纯正，比小时候喝的更细腻。"</p>
+<div class="text-sm text-gray-500">2023年6月2日</div>
+</div>
+<!-- 评价3 -->
+<div class="testimonial-card rounded-xl p-6 shadow-md" data-aos="fade-up" data-aos-delay="200">
+<div class="flex items-center mb-4">
+<img alt="用户头像" class="w-12 h-12 rounded-full mr-4" src="https://randomuser.me/api/portraits/women/65.jpg"/>
+<div>
+<h4 class="font-bold">张女士</h4>
+<div class="flex text-orange-400">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+</div>
+</div>
+</div>
+<p class="text-gray-700 mb-4">"买给孩子的，他很喜欢那个可爱的IP形象。饮料本身营养丰富，不含添加剂，作为家长很放心。"</p>
+<div class="text-sm text-gray-500">2023年4月28日</div>
+</div>
+<!-- 评价4 -->
+<div class="testimonial-card rounded-xl p-6 shadow-md" data-aos="fade-up">
+<div class="flex items-center mb-4">
+<img alt="用户头像" class="w-12 h-12 rounded-full mr-4" src="https://randomuser.me/api/portraits/men/75.jpg"/>
+<div>
+<h4 class="font-bold">赵先生</h4>
+<div class="flex text-orange-400">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="far fa-star"></i>
+</div>
+</div>
+</div>
+<p class="text-gray-700 mb-4">"文创礼盒设计很有特色，送给外地朋友很受欢迎。希望以后能推出更多口味。"</p>
+<div class="text-sm text-gray-500">2023年7月10日</div>
+</div>
+<!-- 评价5 -->
+<div class="testimonial-card rounded-xl p-6 shadow-md" data-aos="fade-up" data-aos-delay="100">
+<div class="flex items-center mb-4">
+<img alt="用户头像" class="w-12 h-12 rounded-full mr-4" src="https://randomuser.me/api/portraits/women/22.jpg"/>
+<div>
+<h4 class="font-bold">刘女士</h4>
+<div class="flex text-orange-400">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+</div>
+</div>
+</div>
+<p class="text-gray-700 mb-4">"便携装很方便，上班时带一瓶，下午喝补充能量。包装不易漏，放在包里很安全。"</p>
+<div class="text-sm text-gray-500">2023年5月30日</div>
+</div>
+<!-- 评价6 -->
+<div class="testimonial-card rounded-xl p-6 shadow-md" data-aos="fade-up" data-aos-delay="200">
+<div class="flex items-center mb-4">
+<img alt="用户头像" class="w-12 h-12 rounded-full mr-4" src="https://randomuser.me/api/portraits/men/48.jpg"/>
+<div>
+<h4 class="font-bold">陈先生</h4>
+<div class="flex text-orange-400">
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star"></i>
+<i class="fas fa-star-half-alt"></i>
+</div>
+</div>
+</div>
+<p class="text-gray-700 mb-4">"去山西旅游时发现的这个品牌，沙棘味道很纯正，买了几箱回来送人，包装精美有地方特色，朋友们都很喜欢。"</p>
+<div class="text-sm text-gray-500">2023年6月18日</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 联系我们 -->
+<section class="content-section hidden py-20 bg-white" id="contact">
+<div class="container mx-auto px-6">
+<div class="text-center mb-16">
+<h2 class="section-title text-3xl md:text-4xl font-bold text-gray-800">联系我们</h2>
+<p class="mt-4 text-gray-600 max-w-3xl mx-auto">我们期待听到您的声音</p>
+</div>
+<div class="flex flex-col md:flex-row gap-10">
+<!-- 联系信息 -->
+<div class="md:w-1/2" data-aos="fade-right">
+<div class="bg-orange-50 rounded-xl p-8 h-full">
+<h3 class="text-2xl font-bold mb-6 text-orange-600">联系方式</h3>
+<div class="space-y-6">
+<div class="flex items-start">
+<div class="bg-orange-100 p-3 rounded-full mr-4">
+<i class="fas fa-map-marker-alt text-orange-600"></i>
+</div>
+<div>
+<h4 class="font-bold mb-1">地址</h4>
+<p class="text-gray-700">山西省太原市小店区沙棘产业园区88号</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="bg-orange-100 p-3 rounded-full mr-4">
+<i class="fas fa-phone-alt text-orange-600"></i>
+</div>
+<div>
+<h4 class="font-bold mb-1">电话</h4>
+<p class="text-gray-700">0351-88889999</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="bg-orange-100 p-3 rounded-full mr-4">
+<i class="fas fa-envelope text-orange-600"></i>
+</div>
+<div>
+<h4 class="font-bold mb-1">邮箱</h4>
+<p class="text-gray-700">info@shanxiseabuckthorn.com</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="bg-orange-100 p-3 rounded-full mr-4">
+<i class="fas fa-clock text-orange-600"></i>
+</div>
+<div>
+<h4 class="font-bold mb-1">营业时间</h4>
+<p class="text-gray-700">周一至周五: 9:00 - 18:00</p>
+<p class="text-gray-700">周六至周日: 10:00 - 16:00</p>
+</div>
+</div>
+</div>
+<div class="mt-8">
+<h4 class="font-bold mb-4">关注我们</h4>
+<div class="flex space-x-4">
+<a class="bg-orange-100 hover:bg-orange-200 w-10 h-10 rounded-full flex items-center justify-center text-orange-600 transition duration-300" href="#">
+<i class="fab fa-weixin"></i>
+</a>
+<a class="bg-orange-100 hover:bg-orange-200 w-10 h-10 rounded-full flex items-center justify-center text-orange-600 transition duration-300" href="#">
+<i class="fab fa-weibo"></i>
+</a>
+<a class="bg-orange-100 hover:bg-orange-200 w-10 h-10 rounded-full flex items-center justify-center text-orange-600 transition duration-300" href="#">
+<i class="fab fa-douyin"></i>
+</a>
+<a class="bg-orange-100 hover:bg-orange-200 w-10 h-10 rounded-full flex items-center justify-center text-orange-600 transition duration-300" href="#">
+<i class="fab fa-xiaohongshu"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- 联系表单 -->
+<div class="md:w-1/2" data-aos="fade-left">
+<div class="bg-orange-50 rounded-xl p-8 h-full">
+<h3 class="text-2xl font-bold mb-6 text-orange-600">发送消息</h3>
+<form>
+<div class="mb-6">
+<label class="block text-gray-700 font-medium mb-2" for="name">姓名</label>
+<input class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" id="name" type="text"/>
+</div>
+<div class="mb-6">
+<label class="block text-gray-700 font-medium mb-2" for="email">邮箱</label>
+<input class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" id="email" type="email"/>
+</div>
+<div class="mb-6">
+<label class="block text-gray-700 font-medium mb-2" for="phone">电话</label>
+<input class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" id="phone" type="tel"/>
+</div>
+<div class="mb-6">
+<label class="block text-gray-700 font-medium mb-2" for="message">留言</label>
+<textarea class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" id="message" rows="5"></textarea>
+</div>
+<button class="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300 transform hover:scale-105" type="submit">
+                                    发送消息
+                                </button>
+</form>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 页脚 -->
+<footer class="bg-gray-900 text-white py-12">
+<div class="container mx-auto px-6">
+<div class="flex flex-col md:flex-row justify-between items-center">
+<div class="mb-6 md:mb-0">
+<div class="flex items-center">
+<img alt="沙棘标志" class="w-10 h-10" src="images/logo.png"/>
+<span class="text-xl font-bold ml-2">山西沙棘</span>
+</div>
+<p class="mt-4 text-gray-400 max-w-md">传承山西文化，分享自然馈赠，我们致力于将优质的沙棘产品带给每一位消费者。</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+<div>
+<h4 class="font-bold text-lg mb-4">快速链接</h4>
+<ul class="space-y-2">
+<li><a class="text-gray-400 hover:text-orange-400 transition duration-300" href="#">首页</a></li>
+<li><a class="text-gray-400 hover:text-orange-400 transition duration-300" href="#">产品</a></li>
+<li><a class="text-gray-400 hover:text-orange-400 transition duration-300" href="#">关于我们</a></li>
+<li><a class="text-gray-400 hover:text-orange-400 transition duration-300" href="#">联系我们</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-lg mb-4">产品</h4>
+<ul class="space-y-2">
+<li><a class="text-gray-400 hover:text-orange-400 transition duration-300" href="#">经典款</a></li>
+<li><a class="text-gray-400 hover:text-orange-400 transition duration-300" href="#">文创款</a></li>
+<li><a class="text-gray-400 hover:text-orange-400 transition duration-300" href="#">便携款</a></li>
+<li><a class="text-gray-400 hover:text-orange-400 transition duration-300" href="#">礼盒装</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-lg mb-4">法律</h4>
+<ul class="space-y-2">
+<li><a class="text-gray-400 hover:text-orange-400 transition duration-300" href="#">隐私政策</a></li>
+<li><a class="text-gray-400 hover:text-orange-400 transition duration-300" href="#">使用条款</a></li>
+<li><a class="text-gray-400 hover:text-orange-400 transition duration-300" href="#">Cookie政策</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+<p class="text-gray-400 mb-4 md:mb-0">© 2023 山西沙棘有限公司. 保留所有权利.</p>
+<div class="flex space-x-6">
+<a class="text-gray-400 hover:text-orange-400 transition duration-300" href="#"><i class="fab fa-weixin"></i></a>
+<a class="text-gray-400 hover:text-orange-400 transition duration-300" href="#"><i class="fab fa-weibo"></i></a>
+<a class="text-gray-400 hover:text-orange-400 transition duration-300" href="#"><i class="fab fa-douyin"></i></a>
+<a class="text-gray-400 hover:text-orange-400 transition duration-300" href="#"><i class="fab fa-xiaohongshu"></i></a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<!-- 返回顶部按钮 -->
+<button class="fixed bottom-8 right-8 bg-orange-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300" id="backToTop">
+<i class="fas fa-arrow-up"></i>
+</button>
+<!-- JavaScript 库 -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<script>
+        // 初始化AOS动画库
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        
+        // 等待DOM完全加载
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取DOM元素
+            const toggleSidebarBtn = document.getElementById('toggleSidebar');
+            const sidebar = document.querySelector('.sidebar');
+            const navItems = document.querySelectorAll('.nav-item');
+            const contentSections = document.querySelectorAll('.content-section');
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            // 切换侧边栏状态
+            toggleSidebarBtn.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                document.querySelector('.main-content').classList.toggle('ml-64');
+                document.querySelector('.main-content').classList.toggle('ml-20');
+            });
+            
+            // 导航菜单点击事件
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // 移除所有active类
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    // 给当前点击项添加active类
+                    this.classList.add('active');
+                    
+                    // 获取目标section
+                    const target = this.getAttribute('data-target');
+                    
+                    // 隐藏所有内容区域
+                    contentSections.forEach(section => {
+                        section.classList.add('hidden');
+                        section.classList.remove('active');
+                    });
+                    
+                    // 显示目标内容区域
+                    document.getElementById(target).classList.remove('hidden');
+                    document.getElementById(target).classList.add('active');
+                    
+                    // 如果是小屏幕，点击后自动折叠侧边栏
+                    if (window.innerWidth < 768) {
+                        sidebar.classList.add('collapsed');
+                        document.querySelector('.main-content').classList.remove('ml-64');
+                        document.querySelector('.main-content').classList.add('ml-20');
+                    }
+                    
+                    // 滚动到顶部
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // 返回顶部按钮
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.remove('opacity-0', 'invisible');
+                    backToTopBtn.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTopBtn.classList.add('opacity-0', 'invisible');
+                    backToTopBtn.classList.remove('opacity-100', 'visible');
+                }
+            });
+            
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // 响应式处理：小屏幕默认折叠侧边栏
+            function handleResize() {
+                if (window.innerWidth < 768) {
+                    sidebar.classList.add('collapsed');
+                    document.querySelector('.main-content').classList.remove('ml-64');
+                    document.querySelector('.main-content').classList.add('ml-20');
+                } else {
+                    sidebar.classList.remove('collapsed');
+                    document.querySelector('.main-content').classList.add('ml-64');
+                    document.querySelector('.main-content').classList.remove('ml-20');
+                }
+            }
+            
+            // 初始检查
+            handleResize();
+            
+            // 窗口大小改变时检查
+            window.addEventListener('resize', handleResize);
+            
+            // 初始化产品轮播
+            const productSwiper = new Swiper('.product-swiper', {
+                loop: true,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+        });
+    </script>
+</body>
+</html>
